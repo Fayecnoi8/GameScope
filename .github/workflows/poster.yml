@@ -1,0 +1,42 @@
+# =============================================================================
+#           *** ملف التشغيل التلقائي (v3.0 - بوت الألعاب) ***
+#
+#  (بسيط جداً - يعمل 6 مرات يومياً)
+# =============================================================================
+
+name: Daily Games Bot (v3.0)
+
+on:
+  schedule:
+    # (يعمل 6 مرات يومياً - كل 4 ساعات)
+    # (0, 4, 8, 12, 16, 20 UTC = 3ص, 7ص, 11ص, 3ع, 7م, 11م بتوقيت بغداد)
+    - cron: '0 */4 * * *'
+
+  # هذا يسمح لنا بالاختبار اليدوي
+  workflow_dispatch:
+
+jobs:
+  run-daily-poster:
+    runs-on: ubuntu-latest
+    env:
+      # تمرير جميع المفاتيح السرية
+      GAMES_API_KEY: ${{ secrets.GAMES_API_KEY }}
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      CHANNEL_USERNAME: ${{ secrets.CHANNEL_USERNAME }}
+      
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install Dependencies
+        run: pip install requests
+        
+      - name: Run Python Script
+        # !! هام: تأكد من أن اسم ملفك هو games_poster.py
+        run: python games_poster.py
+
