@@ -1,23 +1,21 @@
 # =============================================================================
-#           *** ملف التشغيل التلقائي (v1.1 - بوت الألعاب) ***
+#           *** ملف التشغيل التلقائي (v1.2 - اختبار تيليجرام) ***
 #
-#  (نسخة الاختبار - بدون ترجمة)
+#  (هذا الملف يتجاهل API الألعاب ويختبر فقط تيليجرام)
 # =============================================================================
 
-name: Daily Games Bot (v1.1 - No Translation)
+name: Daily Games Bot (v1.2 - Telegram Test)
 
 on:
-  schedule:
-    - cron: '0 0,4,8,12,16,20 * * *'
-  workflow_dispatch:
+  workflow_dispatch: # (سنقوم بالاختبار اليدوي فقط)
 
 jobs:
-  run-daily-poster:
+  run-telegram-test:
     runs-on: ubuntu-latest
     env:
+      # (هذا الاختبار يحتاج فقط إلى هذين المفتاحين)
       BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       CHANNEL_USERNAME: ${{ secrets.CHANNEL_USERNAME }}
-      GAMES_API_KEY: ${{ secrets.GAMES_API_KEY }}
       
     steps:
       - name: Checkout Repository
@@ -28,7 +26,7 @@ jobs:
           python-version: '3.11'
       - name: Install Dependencies
         run: pip install requests
-      - name: Run Python Script
-        # (سيقوم بتشغيل الكود الجديد v1.1)
-        run: python games_poster.py
+      - name: Run Python Script (Telegram Test)
+        # (سيقوم بتشغيل "كود الاختبار" الجديد)
+        run: python games_poster_test.py
 
