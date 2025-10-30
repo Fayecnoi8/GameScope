@@ -1,26 +1,20 @@
 # =============================================================================
-#           *** ملف التشغيل التلقائي (v1.0 - بوت الألعاب) ***
+#           *** ملف التشغيل التلقائي (v1.1 - بوت الألعاب) ***
 #
-#  (ينشر 6 مرات يومياً، كل 4 ساعات)
+#  (نسخة الاختبار - بدون ترجمة)
 # =============================================================================
 
-name: Daily Games Bot (v1.0)
+name: Daily Games Bot (v1.1 - No Translation)
 
 on:
   schedule:
-    # (الجدول: 6 مرات يومياً - كل 4 ساعات)
-    # (UTC: 00, 04, 08, 12, 16, 20)
-    # (توقيت بغداد: 3ص, 7ص, 11ص, 3ظ, 7م, 11م)
     - cron: '0 0,4,8,12,16,20 * * *'
-
-  # هذا يسمح لنا بالاختبار اليدوي
   workflow_dispatch:
 
 jobs:
   run-daily-poster:
     runs-on: ubuntu-latest
     env:
-      # (المفاتيح السرية الثلاثة التي أضفتها للمستودع الجديد)
       BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       CHANNEL_USERNAME: ${{ secrets.CHANNEL_USERNAME }}
       GAMES_API_KEY: ${{ secrets.GAMES_API_KEY }}
@@ -35,5 +29,6 @@ jobs:
       - name: Install Dependencies
         run: pip install requests
       - name: Run Python Script
+        # (سيقوم بتشغيل الكود الجديد v1.1)
         run: python games_poster.py
 
